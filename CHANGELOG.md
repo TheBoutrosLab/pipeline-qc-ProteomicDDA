@@ -1,69 +1,17 @@
 # Changelog
-All notable changes to the pipeline-name pipeline.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+## [1.0.0] - 2026-10-26
 
----
-
-## [Unreleased]
 ### Added
-- Add external `indexFile`
-- Add `sample_id` extraction from BAM
-- Add template input YAMLs
-- Add `pipeline-Nexflow-config` as submodule and redirect `set_resources_allocation`
-- Add `pipeline-Nextflow-module` as submodule
-- Additional out of memory exit code
-- Pipeline release action
-- Template for NFTest testing results in PR template
-- Enable dependabot
-- Add example PlantUML image to README
-- Add workflow to build documentation
-- Add workflows to run Nextflow configuration tests
-- Add `CODEOWNERS` set to `nextflow-wg`
-- Add standard workflows for documentation and tests
-- Add schema example with custom types
-### Changed
-- Switch resource limit checks to external scripts
-- Update links in on-prem `Confluence` to point to cloud-based `Confluence`
-- Fix `CODEOWNERS` file
-- Use `schema.check_path` for `workDir` validation
-- Add `Discussions` and `Contributors` to the Table of Contents in `README.md`
-- Update from DSL1 to DSL2
-- Standardize config structure
-- Restructure repo so main script is `main.nf`
-- Reorganize contributors and metadata
-- Reorganize PR template so description is at top
-- Update automatic node detection to allow for `F2` detection
-- Update `ISSUE_TEMPLATE`
-- Standardize input/output/parameter structure in `README.md`
-- Avoid modification of input parameter `output_dir`
-- Create default docker container registry parameter for tools
-- Use `methods.setup_process_afterscript()` to capture log files
-- Use metadata-as-input rather than `addParams`
 
----
+- Initial Nextflow DSL2 DDA quality-control pipeline for completed metapipeline outputs, with versioned Boutros Lab configuration, container profiles, resource allocation, and a combined long-form QC metrics TSV.
+- Per-fraction mzML acquisition summaries and offline interactive 3D MS1 peak maps generated through separate pyOpenMS extraction and Plotly rendering processes.
+- Unfiltered search and final filtered identification summaries from idXML, including target and decoy score and mass-error distributions.
+- Cohort protein-group summaries for ProteinProphet and ProteinInferencer, and peptide and protein abundance summaries from ProteinQuantifier.
+- UCLA nf-test integration cases for LFQ and TMT ProteinProphet outputs, with case-specific metapipeline inputs.
+- Run, input, output, and testing documentation; individual process logs remain available after workflow completion.
 
-## [1.0.0] - YYYY-MM-DD
-### Added
-- For new features.
-- Added item 1.
-
-### Changed
-- For changes in existing functionality.
-- Changed item 1.
-
-### Deprecated
-- For soon-to-be removed features.
-
-### Removed
-- For now removed features.
-- Removed item 1.
-
-### Fixed
-- For any bug fixes.
-- Fixed item 1.
-
-### Security
-- In case of vulnerabilities.
+[1.0.0]: https://github.com/TheBoutrosLab/pipeline-qc-ProteomicDDA/releases/tag/v1.0.0

@@ -1,0 +1,5 @@
+sample_name,fraction_id,path
+LFQ_Orbitrap_DDA_Ecoli_01,1,$TEST_DATA_DIR/ecoli_lfq/mzML/LFQ_Orbitrap_DDA_Ecoli_01_indexed-10min-3.mzML
+LFQ_Orbitrap_DDA_Ecoli_01,2,$TEST_DATA_DIR/ecoli_lfq/mzML/LFQ_Orbitrap_DDA_Ecoli_01_indexed-10min-4.mzML
+LFQ_Orbitrap_DDA_Ecoli_02,1,$TEST_DATA_DIR/ecoli_lfq/mzML/LFQ_Orbitrap_DDA_Ecoli_02_indexed-10min-3.mzML
+LFQ_Orbitrap_DDA_Ecoli_02,2,$TEST_DATA_DIR/ecoli_lfq/mzML/LFQ_Orbitrap_DDA_Ecoli_02_indexed-10min-4.mzML
