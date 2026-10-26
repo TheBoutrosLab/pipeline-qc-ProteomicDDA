@@ -41,23 +41,15 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../overview/">Overview</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../how-to-run/">How To Run</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../flow-diagram/">Flow Diagram</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../pipeline-steps/">Pipeline Steps</a>
+                <li class="toctree-l1"><a class="reference internal" href="../how-to-run/">How to run</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../inputs/">Inputs</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../pipeline-steps/">Pipeline steps</a>
                 </li>
               </ul>
               <ul class="current">
@@ -67,19 +59,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../testing-and-validation/">Testing and Validation</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../references/">References</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../discussions/">Discussions</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../contributors/">Contributors</a>
+                <li class="toctree-l1"><a class="reference internal" href="../testing/">Testing</a>
                 </li>
               </ul>
               <ul>
@@ -102,7 +82,7 @@
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
       <li class="breadcrumb-item active">Outputs</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/TheBoutrosLab/pipeline-qc-ProteomicDDA/blob/ee07588e0fa681d8979a316e0409498ffcc29bc1/README.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/TheBoutrosLab/pipeline-qc-ProteomicDDA/blob/2512bab9f27d7e4e4df6b92d69d89b5c0226c245/README.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -111,8 +91,7 @@
             <div class="section" itemprop="articleBody">
               
                 <h2 id="outputs">Outputs</h2>
-<!-- List and describe the final output(s) of the pipeline. -->
-
+<p>Results are published under <code>&lt;output_dir&gt;/qc-ProteomicDDA-1.0.0/&lt;dataset_id&gt;/</code>:</p>
 <table>
 <thead>
 <tr>
@@ -122,26 +101,58 @@
 </thead>
 <tbody>
 <tr>
-<td>ouput 1</td>
-<td>1 - 2 sentence description of the output.</td>
+<td><code>output/&lt;dataset_id&gt;_QC_metrics.tsv</code></td>
+<td>Combined long-form QC table.</td>
 </tr>
 <tr>
-<td>ouput 2</td>
-<td>1 - 2 sentence description of the output.</td>
+<td><code>output/mzML/&lt;sample_name&gt;_&lt;fraction_id&gt;_mzML_metrics.tsv</code></td>
+<td>Per-fraction mzML metrics.</td>
 </tr>
 <tr>
-<td>ouput n</td>
-<td>1 - 2 sentence description of the output.</td>
+<td><code>output/mzML/&lt;sample_name&gt;_&lt;fraction_id&gt;_MS1_matrix.tsv</code> and <code>.json</code></td>
+<td>Selected MS1 peaks and selection metadata.</td>
+</tr>
+<tr>
+<td><code>output/mzML/&lt;sample_name&gt;_&lt;fraction_id&gt;_MS1_landscape.html</code></td>
+<td>Interactive MS1 figure.</td>
+</tr>
+<tr>
+<td><code>output/search_idXML/&lt;sample_name&gt;_&lt;search_engine&gt;_search_idXML_metrics.tsv</code></td>
+<td>Unfiltered search metrics.</td>
+</tr>
+<tr>
+<td><code>output/filtered_idXML/&lt;sample_name&gt;_filtered_idXML_metrics.tsv</code></td>
+<td>Final filtered identification metrics.</td>
+</tr>
+<tr>
+<td><code>output/ProteinGroups/&lt;dataset_id&gt;_ProteinGroups_metrics.tsv</code></td>
+<td>Cohort inference metrics.</td>
+</tr>
+<tr>
+<td><code>output/ProteinQuantifier/&lt;dataset_id&gt;_protein_quant_metrics.tsv</code></td>
+<td>Protein abundance metrics.</td>
+</tr>
+<tr>
+<td><code>output/ProteinQuantifier/&lt;dataset_id&gt;_peptide_quant_metrics.tsv</code></td>
+<td>Peptide abundance metrics.</td>
+</tr>
+<tr>
+<td><code>log-*/nextflow-log/</code></td>
+<td>Nextflow trace, timeline, report, and effective parameters.</td>
+</tr>
+<tr>
+<td><code>log-*/process-log/</code></td>
+<td>Individual process logs.</td>
 </tr>
 </tbody>
 </table>
-<hr />
+<p>Each metric row records <code>dataset_id</code>, <code>acquisition_mode</code>, <code>layer</code>, <code>sample_name</code>, <code>fraction_id</code>, <code>search_engine</code>, <code>inference_route</code>, <code>metric_name</code>, <code>group</code>, <code>value</code>, <code>unit</code>, <code>status</code>, <code>source_file</code>, and <code>calculation_version</code>. Cohort protein-group rows have no sample key. Programmed LC gradient duration and retention-time error are not derived from these inputs. Longitudinal CVs and correlations require explicit repeated-QC metadata.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../inputs/" class="btn btn-neutral float-left" title="Inputs"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../testing-and-validation/" class="btn btn-neutral float-right" title="Testing and Validation">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../pipeline-steps/" class="btn btn-neutral float-left" title="Pipeline steps"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../testing/" class="btn btn-neutral float-right" title="Testing">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -168,10 +179,10 @@
         </span>
     
     
-      <span><a href="../inputs/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../pipeline-steps/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../testing-and-validation/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../testing/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
