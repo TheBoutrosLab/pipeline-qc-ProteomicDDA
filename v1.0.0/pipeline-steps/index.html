@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Pipeline steps - pipeline-qc-ProteomicDDA</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/version-select.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Pipeline steps";
+        var mkdocs_page_input_path = "pipeline-steps.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> pipeline-qc-ProteomicDDA
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../how-to-run/">How to run</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../inputs/">Inputs</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Pipeline steps</a>
+    <ul class="current">
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../outputs/">Outputs</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../testing/">Testing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../license/">License</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">pipeline-qc-ProteomicDDA</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Pipeline steps</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/TheBoutrosLab/pipeline-qc-ProteomicDDA/blob/v1.0.0/README.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="pipeline-steps">Pipeline steps</h2>
+<table>
+<thead>
+<tr>
+<th>Process</th>
+<th>Input</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>summarize_mzML</code></td>
+<td>One original mzML fraction</td>
+<td>Acquisition duration, MS1/MS2 scan counts and rates, survey cycle timing, MS2 scans per cycle, and whole-run/early/late TIC summaries</td>
+</tr>
+<tr>
+<td><code>extract_MS1_matrix</code></td>
+<td>One mzML fraction</td>
+<td>Bounded RT/m/z/intensity peak matrix and selection metadata</td>
+</tr>
+<tr>
+<td><code>plot_MS1_landscape</code></td>
+<td>Matrix and metadata</td>
+<td>Offline interactive 3D MS1 stick spectrum</td>
+</tr>
+<tr>
+<td><code>summarize_search_idXML</code></td>
+<td>One raw search idXML per sample and engine</td>
+<td>Candidate and top-hit counts, score, signed/absolute ppm mass error, target/decoy, and precursor charge summaries</td>
+</tr>
+<tr>
+<td><code>summarize_filtered_idXML</code></td>
+<td>One final filtered idXML per sample or plex</td>
+<td>Accepted PSMs, distinct retained peptides, and validated score summaries</td>
+</tr>
+<tr>
+<td><code>summarize_ProteinGroups</code></td>
+<td>One cohort inference artifact</td>
+<td>Group count and size, plus ProteinProphet probability or ProteinInferencer score summaries when present</td>
+</tr>
+<tr>
+<td><code>summarize_ProteinQuantifier</code></td>
+<td>Peptide and protein abundance tables</td>
+<td>Quantified feature counts, zero/missing counts, missing fractions, and log10 positive intensity summaries per assay column</td>
+</tr>
+<tr>
+<td><code>collect_QCMetrics</code></td>
+<td>All stage TSVs</td>
+<td>Combined <code>&lt;dataset_id&gt;_QC_metrics.tsv</code></td>
+</tr>
+</tbody>
+</table>
+<p>A continuous distribution is saved as its nonmissing count, missing count, and 5th, 25th, 50th, 75th, and 95th percentiles. <code>group=all</code> includes target and decoy top hits; target and decoy also have separate summaries. Charge states have counts and fractions. The searchable-spectrum denominator is not present in the raw idXML when unmatched spectra are omitted, so <code>searched_ms2_spectrum_count</code> and <code>spectrum_match_coverage</code> are explicitly marked <code>unavailable</code>. A recorded mzML acquisition duration is not necessarily the programmed LC gradient duration.</p>
+<p>The MS1 matrix includes up to 120 strongest positive peaks from each of 350 evenly spaced MS1 scans within m/z 300–1200. The HTML embeds Plotly and works offline. Its colors encode within-run log-intensity percentiles: yellow (0–25), orange (25–50), red (50–75), purple (75–95), and blue (95–100). Colors do not represent the same absolute intensity across runs.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../inputs/" class="btn btn-neutral float-left" title="Inputs"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../outputs/" class="btn btn-neutral float-right" title="Outputs">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/TheBoutrosLab/pipeline-qc-ProteomicDDA/tree/v1.0.0" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../inputs/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../outputs/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../js/version-select.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
