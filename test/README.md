@@ -1,12 +1,10 @@
-# Pipeline Test Files
+# Integration tests
 
-The test files in this directory were generated synthetically from a tiny SAM file:
+Run either ProteinProphet case inside a Slurm allocation:
 
-```
-@HD	VN:1.0	SO:unsorted
-@SQ	SN:chr1	LN:1000
-@RG	ID:sample1	SM:PatientY	LB:lib1	PL:ILLUMINA
-read1	0	chr1	100	60	10M	*	0	0	AAAAAAAAAA	FFFFFFFFFF
-```
+- `bash test/run-nftest.sh test-integration-LFQ-ProteinProphet`
+- `bash test/run-nftest.sh test-integration-TMT-ProteinProphet`
 
-FIXME: These files should be removed from any pipelines generated from this template.
+Both cases use repository `mzml.csv`, `search.csv`, and `filtered.csv` manifests with explicit test-data paths. Copy `.env-template` to `.env` and set `TEST_DATA_DIR`. The CSV path references are expanded from that variable at test launch.
+
+The LFQ case uses four mzML fractions across two samples from `$TEST_DATA_DIR/ecoli_lfq/metapipeline-ProteomicDDA-ProteinProphet`. The TMT case uses six mzML fractions across two plexes from the corresponding `ecoli_tmt` run. Both cases require the filtered ProteinProphet group idXML used by ProteinQuantifier, which is published when the upstream protein quantitation run uses `save_intermediate_files = true`.

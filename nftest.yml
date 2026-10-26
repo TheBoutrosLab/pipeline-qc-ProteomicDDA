@@ -1,0 +1,17 @@
+---
+global:
+  temp_dir: work
+  nf_config: test/global.config
+  remove_temp: false
+  clean_logs: true
+cases:
+  - name: test-integration-LFQ-ProteinProphet
+    message: Summarize fractionated LFQ DDA output and ProteinProphet groups
+    nf_script: main.nf
+    nf_config: test/test-integration-LFQ-ProteinProphet/test.config
+    verbose: true
+  - name: test-integration-TMT-ProteinProphet
+    message: Summarize fractionated TMT DDA output and ProteinProphet groups
+    nf_script: main.nf
+    nf_config: test/test-integration-TMT-ProteinProphet/test.config
+    verbose: true

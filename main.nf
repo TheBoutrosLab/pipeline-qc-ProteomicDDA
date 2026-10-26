@@ -1,121 +1,87 @@
 #!/usr/bin/env nextflow
+nextflow.enable.dsl = 2
+include { summarize_mzML } from './module/summarize_mzML'
+include { extract_MS1_matrix } from './module/extract_MS1_matrix'
+include { plot_MS1_landscape } from './module/plot_MS1_landscape'
+include { summarize_search_idXML } from './module/summarize_search_idXML'
+include { summarize_filtered_idXML } from './module/summarize_filtered_idXML'
+include { summarize_ProteinGroups } from './module/summarize_ProteinGroups'
+include { summarize_ProteinQuantifier } from './module/summarize_ProteinQuantifier'
+include { collect_QCMetrics } from './module/collect_QCMetrics'
 
-nextflow.enable.dsl=2
+def resolveInput(def csv, String value) {
+    if (!value?.trim()) error "Empty input path in ${csv}"
+    def result = file(value.startsWith('/') ? value : "${csv.parent}/${value}")
+    if (!result.isFile()) error "Missing input file: ${result}"
+    return result
+}
 
-// Include processes and workflows here
-include { run_validate_PipeVal } from './external/pipeline-Nextflow-module/modules/PipeVal/validate/main.nf'
-
-include { generate_standard_filename } from './external/pipeline-Nextflow-module/modules/common/generate_standardized_filename/main.nf'
-include { indexFile } from './external/pipeline-Nextflow-module/modules/common/indexFile/main.nf'
-
-// Add this pipeline's custom modules here
-include { run_command_Tool } from './module/EXAMPLE_checksum.nf'
-
-// include { tool_name_command_name } from './module/module-name'
-
-// Log info here
-log.info """\
-        ======================================
-        T E M P L A T E - N F  P I P E L I N E
-        ======================================
-        Boutros Lab
-
-        Current Configuration:
-        - pipeline:
-            name: ${workflow.manifest.name}
-            version: ${workflow.manifest.version}
-
-        - input:
-            input a: ${params.variable_name}
-            ...
-
-        - output:
-            output a: ${params.output_path}
-            ...
-
-        - options:
-            option a: ${params.option_name}
-            ...
-
-        Tools Used:
-            tool a: ${params.docker_image_name}
-
-        ------------------------------------
-        Starting workflow...
-        ------------------------------------
-        """
-        .stripIndent()
-
-// Establish input channels here
-Channel
-    .fromList(params.samples_to_process)
-    .map { sample ->
-        return tuple(sample.id, sample.path, sample.sample_type)
-    }
-    .set { samplesToProcessChannel }
-
-Channel
-    .fromList(params.samples_to_process)
-    .map{ it -> [it['path'], indexFile(it['path'])] }
-    .flatten()
-    .set { files_to_validate_ch }
-
-// These are a few potential channels that can be mixed in
-
-/*
-Channel
-    .from(
-        params.reference,
-        params.reference_index,
-        params.reference_dict
-        )
-    .set { reference_ch }
-
-// Decription of input channel
-Channel
-    .fromPath(params.variable_name)
-    .ifEmpty { error "Cannot find: ${params.variable_name}" }
-    .set { input_ch_variable_name }
-
-files_to_validate_ch = files_to_validate_ch
-    .mix(reference_ch)
-    .mix(input_ch_variable_name)
-*/
-
-// Main workflow here
 workflow {
-
-
-    base_meta = Channel.value([
-        'log_output_dir': params.log_output_dir,
-        'output_dir': params.output_dir_base
-    ])
-
-    // Validate input files
-    run_validate_PipeVal(
-        base_meta.combine(files_to_validate_ch)
-        )
-
-    // Capture validation results
-    run_validate_PipeVal.out.validation_result
-        .collectFile(
-            name: 'input_validation.txt', newLine: true,
-            storeDir: "${params.output_dir_base}/validation"
-        )
-
-    // Add pipeline-specific workflow steps here
-    run_command_Tool(
-        run_validate_PipeVal.out.validated_file
-        )
-
-    /*
-    tool_name_command_name(
-        samplesToProcessChannel,
-        input_ch_variable_name
-        )
-    */
-
-    workflow.onComplete = {
-        WorkflowFinalizer.completeWorkflow(workflow, params);
+    mzmlRows = Channel.fromPath(params.mzml_csv).splitCsv(header: true).toList().map { [rows: it] }
+    searchRows = Channel.fromPath(params.search_idxml_csv).splitCsv(header: true).toList().map { [rows: it] }
+    filteredRows = Channel.fromPath(params.filtered_idxml_csv).splitCsv(header: true).toList().map { [rows: it] }
+    manifests = mzmlRows.combine(searchRows).combine(filteredRows).map { mzPayload, rawPayload, finalPayload ->
+        def mzRows = mzPayload.rows
+        def rawRows = rawPayload.rows
+        def finalRows = finalPayload.rows
+        if (!mzRows || !rawRows || !finalRows) error 'All three manifests must contain rows'
+        def safe = { value -> value ==~ /[A-Za-z0-9][A-Za-z0-9._-]*/ }
+        def mz = [:]
+        mzRows.each { row ->
+            def sample = row.sample_name?.trim()
+            def fraction = row.fraction_id?.trim()
+            if (!safe(sample) || !safe(fraction) || mz.containsKey([sample, fraction]))
+                error "Invalid or duplicate mzML sample/fraction: ${sample}/${fraction}"
+            mz[[sample, fraction]] = resolveInput(file(params.mzml_csv), row.path?.trim())
+        }
+        def runNames = mz.keySet().collect { key -> "${key[0]}_${key[1]}" }
+        if ((runNames as Set).size() != runNames.size())
+            error 'Sample/fraction names create duplicate mzML output filenames'
+        def search = [:]
+        rawRows.each { row ->
+            def sample = row.sample_name?.trim()
+            def engine = row.search_engine?.trim()
+            if (!safe(sample) || !(engine in ['Comet', 'Sage', 'MSFragger']) ||
+                search.containsKey([sample, engine]))
+                error "Invalid or duplicate search sample/engine: ${sample}/${engine}"
+            search[[sample, engine]] = resolveInput(file(params.search_idxml_csv), row.idXML?.trim())
+        }
+        def filtered = [:]
+        finalRows.each { row ->
+            def sample = (row.sample_name ?: row.plex_id)?.trim()
+            if (!safe(sample) || filtered.containsKey(sample))
+                error "Invalid or duplicate filtered sample: ${sample}"
+            filtered[sample] = resolveInput(file(params.filtered_idxml_csv), row.idXML?.trim())
+        }
+        def mzSamples = mz.keySet().collect { it[0] } as Set
+        if (mzSamples != (search.keySet().collect { it[0] } as Set) ||
+            mzSamples != (filtered.keySet() as Set))
+            error 'mzML, search, and filtered manifests must describe the same samples'
+        def mzEntries = mz.keySet().sort().collect { key -> tuple(key[0], key[1], mz[key]) }
+        def rawEntries = search.keySet().sort().collect { key -> tuple(key[0], key[1], search[key]) }
+        def finalEntries = filtered.keySet().sort().collect { sample ->
+            def engines = search.keySet().findAll { it[0] == sample }.collect { it[1] }
+            tuple(sample, engines.size() == 1 ? engines[0] : 'consensus', filtered[sample])
+        }
+        [mz: mzEntries, raw: rawEntries, filtered: finalEntries]
     }
+    mzEntries = manifests.flatMap { it.mz }
+    summarize_mzML(mzEntries)
+    extract_MS1_matrix(mzEntries.map { sample, fraction, mzml ->
+        tuple("${sample}_${fraction}", mzml)
+    })
+    plot_MS1_landscape(extract_MS1_matrix.out.matrix)
+    summarize_search_idXML(manifests.flatMap { it.raw })
+    summarize_filtered_idXML(manifests.flatMap { it.filtered })
+    summarize_ProteinGroups(file(params.protein_groups))
+    quantInputs = Channel.of(tuple('protein', file(params.protein_quant_csv)),
+                             tuple('peptide', file(params.peptide_quant_csv)))
+    summarize_ProteinQuantifier(quantInputs)
+    allMetrics = summarize_mzML.out.metrics
+        .mix(summarize_search_idXML.out.metrics)
+        .mix(summarize_filtered_idXML.out.metrics)
+        .mix(summarize_ProteinGroups.out.metrics)
+        .mix(summarize_ProteinQuantifier.out.metrics)
+        .collect()
+    collect_QCMetrics(allMetrics)
 }
