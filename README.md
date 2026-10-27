@@ -122,7 +122,7 @@ The UCLA nf-test suite has LFQ ProteinProphet and TMT ProteinProphet integration
 bash test/run-nftest.sh test-integration-LFQ-ProteinProphet
 ```
 
-See [test/README.md](test/README.md) for the TMT case and required test-data layout. These tests require the lab's external metapipeline outputs; they are not self-contained fixtures. `python -m unittest discover -s test -p "test_psm_features.py"` checks both published feature formats with synthetic inputs.
+See [test/README.md](test/README.md) for the TMT case and required test-data layout. These tests require the lab's external metapipeline outputs; they are not self-contained fixtures.
 
 ## License
 
