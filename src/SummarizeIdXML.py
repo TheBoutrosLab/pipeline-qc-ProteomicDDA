@@ -81,7 +81,8 @@ def summarize(args):
     peptide_ids = oms.PeptideIdentificationList()
     oms.IdXMLFile().load(args.input, protein_ids, peptide_ids)
     filtered = args.stage == 'filtered'
-    metrics = Metrics(args.dataset_id, args.stage, args.input, sample_name=args.sample_name,
+    layer = 'validated_identification' if filtered else 'raw_identification'
+    metrics = Metrics(args.dataset_id, layer, args.input, sample_name=args.sample_name,
                       search_engine=args.search_engine)
     (scores, errors, absolute, charges, missing_charges, missing_errors,
      score_types, directions, total_hits, spectra, sequences) = score_rows(peptide_ids, filtered)

@@ -4,6 +4,11 @@ import argparse
 import csv
 from QCMetrics import FIELDS
 
+LAYER_ORDER = ('acquisition', 'raw_identification', 'psm_features',
+               'validated_identification', 'protein_inference', 'spectral_library',
+               'quantification')
+LAYER_RANK = {layer: rank for rank, layer in enumerate(LAYER_ORDER)}
+
 
 def collect(args):
     """Validate schema, combine, and sort metrics."""
@@ -14,9 +19,14 @@ def collect(args):
             if reader.fieldnames != FIELDS:
                 raise ValueError(f'Unexpected QC metric columns in {path}: {reader.fieldnames}')
             combined.extend(reader)
-    combined.sort(key=lambda row: tuple(row[key] for key in
-                  ('dataset_id', 'layer', 'sample_name', 'fraction_id', 'search_engine',
-                   'inference_route', 'metric_name', 'group', 'source_file')))
+    unknown_layers = {row['layer'] for row in combined} - LAYER_RANK.keys()
+    if unknown_layers:
+        raise ValueError(f"Unknown metric layers: {', '.join(sorted(unknown_layers))}")
+    combined.sort(key=lambda row: (row['dataset_id'], LAYER_RANK[row['layer']],
+                                   row['sample_name'], row['fraction_id'],
+                                   row['search_engine'], row['inference_route'],
+                                   row['source_process'], row['metric_name'],
+                                   row['group'], row['source_file']))
     with open(args.output, 'w', newline='', encoding='utf-8') as handle:
         writer = csv.DictWriter(handle, FIELDS, delimiter='\t')
         writer.writeheader()

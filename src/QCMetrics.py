@@ -3,8 +3,8 @@ import csv
 import math
 
 FIELDS = ['dataset_id', 'acquisition_mode', 'layer', 'sample_name', 'fraction_id',
-          'search_engine', 'inference_route', 'metric_name', 'group', 'value', 'unit',
-          'status', 'source_file', 'calculation_version']
+          'search_engine', 'inference_route', 'source_process', 'metric_name',
+          'group', 'value', 'unit', 'status', 'source_file', 'calculation_version']
 QUANTILES = (5, 25, 50, 75, 95)
 
 
@@ -34,7 +34,7 @@ class Metrics:
     def __init__(self, dataset_id, layer, source, **dimensions):
         self.context = {'dataset_id': dataset_id, 'acquisition_mode': 'DDA',
                         'layer': layer, 'sample_name': '', 'fraction_id': '',
-                        'search_engine': '', 'inference_route': '',
+                        'search_engine': '', 'inference_route': '', 'source_process': '',
                         'source_file': str(source), 'calculation_version': '1.0.0'}
         self.context.update(dimensions)
         self.rows = []
@@ -55,11 +55,11 @@ class Metrics:
         numbers = sorted(number for value in values if (number := finite(value)) is not None)
         self.add(name + '_count', len(numbers), group=group)
         self.add(name + '_missing_count', len(values) - len(numbers), group=group)
-        if numbers:
-            for q in QUANTILES:
+        for q in QUANTILES:
+            if numbers:
                 self.add(f'{name}_p{q:02d}', percentile(numbers, q), unit, group)
-        else:
-            self.unavailable(name + '_p50', unit, group)
+            else:
+                self.unavailable(f'{name}_p{q:02d}', unit, group)
 
     def write(self, path):
         """Write metric rows to a TSV."""

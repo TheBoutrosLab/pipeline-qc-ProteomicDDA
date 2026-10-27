@@ -1,0 +1,3 @@
+sample_name,search_engine,route,fraction_id,path
+LFQ_Orbitrap_DDA_Ecoli_01,MSFragger,PSMFeatureExtractor,,$TEST_DATA_DIR/ecoli_lfq/metapipeline-ProteomicDDA-ProteinProphet/metapipeline-ProteomicDDA-1.0.1/ecoli_lfq/main_workflow/validate-ProteomicPSM-2.3.1/LFQ_Orbitrap_DDA_Ecoli_01/OpenMS-3.5.0/output/LFQ_Orbitrap_DDA_Ecoli_01_MSFragger_featureExtracted.idXML
+LFQ_Orbitrap_DDA_Ecoli_02,MSFragger,PSMFeatureExtractor,,$TEST_DATA_DIR/ecoli_lfq/metapipeline-ProteomicDDA-ProteinProphet/metapipeline-ProteomicDDA-1.0.1/ecoli_lfq/main_workflow/validate-ProteomicPSM-2.3.1/LFQ_Orbitrap_DDA_Ecoli_02/OpenMS-3.5.0/output/LFQ_Orbitrap_DDA_Ecoli_02_MSFragger_featureExtracted.idXML

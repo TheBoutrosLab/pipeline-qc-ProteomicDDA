@@ -5,6 +5,7 @@ include { extract_MS1_matrix } from './module/extract_MS1_matrix'
 include { plot_MS1_landscape } from './module/plot_MS1_landscape'
 include { summarize_search_idXML } from './module/summarize_search_idXML'
 include { summarize_filtered_idXML } from './module/summarize_filtered_idXML'
+include { summarize_PSMFeatures } from './module/summarize_PSMFeatures'
 include { summarize_ProteinGroups } from './module/summarize_ProteinGroups'
 include { summarize_ProteinQuantifier } from './module/summarize_ProteinQuantifier'
 include { collect_QCMetrics } from './module/collect_QCMetrics'
@@ -73,6 +74,36 @@ workflow {
     plot_MS1_landscape(extract_MS1_matrix.out.matrix)
     summarize_search_idXML(manifests.flatMap { it.raw })
     summarize_filtered_idXML(manifests.flatMap { it.filtered })
+    if (params.psm_features_csv) {
+        featureRows = Channel.fromPath(params.psm_features_csv).splitCsv(header: true)
+            .toList().map { [rows: it] }
+        featureEntries = featureRows.combine(manifests).flatMap { rowPayload, manifest ->
+            def safe = { value -> value ==~ /[A-Za-z0-9][A-Za-z0-9._-]*/ }
+            def knownSearches = manifest.raw.collect { [it[0], it[1]] } as Set
+            def knownFractions = manifest.mz.collect { [it[0], it[1]] } as Set
+            def seen = [] as Set
+            rowPayload.rows.collect { row ->
+                def sample = row.sample_name?.trim()
+                def engine = row.search_engine?.trim()
+                def route = row.route?.trim()
+                def fraction = row.fraction_id?.trim() ?: ''
+                if (!safe(sample) || !safe(engine) || !([sample, engine] in knownSearches) ||
+                    !(route in ['MSBooster', 'PSMFeatureExtractor']) ||
+                    (route == 'MSBooster' && !([sample, fraction] in knownFractions)) ||
+                    (fraction && !safe(fraction)) || !seen.add([sample, engine, route, fraction]))
+                    error "Invalid or duplicate PSM feature manifest row: ${row}"
+                def input = resolveInput(file(params.psm_features_csv), row.path?.trim())
+                if ((route == 'MSBooster' && !input.name.endsWith('.pin')) ||
+                    (route == 'PSMFeatureExtractor' && !input.name.endsWith('.idXML')))
+                    error "Wrong PSM feature file type for ${route}: ${input}"
+                tuple(sample, engine, route, fraction, input)
+            }
+        }
+        summarize_PSMFeatures(featureEntries)
+        featureMetrics = summarize_PSMFeatures.out.metrics
+    } else {
+        featureMetrics = Channel.empty()
+    }
     summarize_ProteinGroups(file(params.protein_groups))
     quantInputs = Channel.of(tuple('protein', file(params.protein_quant_csv)),
                              tuple('peptide', file(params.peptide_quant_csv)))
@@ -80,6 +111,7 @@ workflow {
     allMetrics = summarize_mzML.out.metrics
         .mix(summarize_search_idXML.out.metrics)
         .mix(summarize_filtered_idXML.out.metrics)
+        .mix(featureMetrics)
         .mix(summarize_ProteinGroups.out.metrics)
         .mix(summarize_ProteinQuantifier.out.metrics)
         .collect()

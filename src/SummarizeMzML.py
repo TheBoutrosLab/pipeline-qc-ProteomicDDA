@@ -9,7 +9,7 @@ def summarize(args):
     """Measure recorded duration, scan rates, cycles, and TIC."""
     experiment = oms.MSExperiment()
     oms.MzMLFile().load(args.input, experiment)
-    metrics = Metrics(args.dataset_id, 'mzML', args.input, sample_name=args.sample_name,
+    metrics = Metrics(args.dataset_id, 'acquisition', args.input, sample_name=args.sample_name,
                       fraction_id=args.fraction_id)
     times, ms1, ms2, tic = [], [], [], []
     cycle_counts = []

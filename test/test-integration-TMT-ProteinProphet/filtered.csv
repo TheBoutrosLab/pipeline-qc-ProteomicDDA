@@ -1,3 +1,3 @@
 sample_name,idXML
-Ecoli_12prot_spike_Fr1,$TEST_DATA_DIR/ecoli_tmt/metapipeline-ProteomicDDA-ProteinProphet/metapipeline-ProteomicDDA-1.0.0/ecoli_tmt/main_workflow/validate-ProteomicPSM-2.2.2/Ecoli_12prot_spike_Fr1/OpenMS-3.5.0/output/Ecoli_12prot_spike_Fr1_MSFragger_filter.idXML
-Ecoli_12prot_spike_Fr2,$TEST_DATA_DIR/ecoli_tmt/metapipeline-ProteomicDDA-ProteinProphet/metapipeline-ProteomicDDA-1.0.0/ecoli_tmt/main_workflow/validate-ProteomicPSM-2.2.2/Ecoli_12prot_spike_Fr2/OpenMS-3.5.0/output/Ecoli_12prot_spike_Fr2_MSFragger_filter.idXML
+Ecoli_12prot_spike_Fr1,$TEST_DATA_DIR/ecoli_tmt/metapipeline-ProteomicDDA-ProteinProphet/metapipeline-ProteomicDDA-1.0.1/ecoli_tmt/main_workflow/validate-ProteomicPSM-2.3.1/Ecoli_12prot_spike_Fr1/OpenMS-3.5.0/output/Ecoli_12prot_spike_Fr1_MSFragger_filter.idXML
+Ecoli_12prot_spike_Fr2,$TEST_DATA_DIR/ecoli_tmt/metapipeline-ProteomicDDA-ProteinProphet/metapipeline-ProteomicDDA-1.0.1/ecoli_tmt/main_workflow/validate-ProteomicPSM-2.3.1/Ecoli_12prot_spike_Fr2/OpenMS-3.5.0/output/Ecoli_12prot_spike_Fr2_MSFragger_filter.idXML
