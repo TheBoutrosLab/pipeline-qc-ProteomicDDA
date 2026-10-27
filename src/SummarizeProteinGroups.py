@@ -26,7 +26,7 @@ def summarize(args):
             if not members:
                 raise ValueError('Protein group has no members')
             groups.append((members, finite(group.probability)))
-    metrics = Metrics(args.dataset_id, 'protein_groups', args.input,
+    metrics = Metrics(args.dataset_id, 'protein_inference', args.input,
                       inference_route=args.route)
     metrics.add('protein_group_count', len(groups))
     metrics.distribution('proteins_per_group', (len(members) for members, _ in groups))
