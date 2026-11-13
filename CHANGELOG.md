@@ -5,6 +5,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add a schematic of the DDA QC metric and MS1 visualization workflows.
+
+### Changed
+
+- Match the DIA QC table's 12 columns and their order while standardizing shared metric names.
+- Count raw top-hit peptides separately from all validated peptides; align score metadata and unknown target/decoy label counts.
+- Summarize ProteinQuantifier proteins as quantified protein groups, with TMT biological labels in `group` and LFQ samples in `sample_name`.
+- Refresh LFQ and TMT integration fixtures to verified metapipeline 1.2.7 and ProteinQuantifier 1.3.0 outputs.
+- Organize QC readers, summarizers, matrix extraction, plotting, and metric collection into focused classes without changing their output.
+
+### Removed
+
+- Remove DDA-only QC table columns for acquisition mode, quantification mode, inference route, reporter channel, assay ID, and calculation version.
+- Drop DDA early/late TIC, unavailable searched-spectrum denominator/coverage, cohort quantification row totals, and separate abundance zero/missing metrics.
+- Drop compatibility with older ProteinQuantifier abundance headers and previous QC output names.
+
 ## [1.1.1] - 2026-10-28
 
 ### Added

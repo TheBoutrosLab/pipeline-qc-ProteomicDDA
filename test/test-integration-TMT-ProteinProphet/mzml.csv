@@ -1,7 +1,7 @@
-sample_name,fraction_id,annotation_id,path
-Ecoli_12prot_spike_Fr1,1,ecoli,$TEST_DATA_DIR/ecoli_tmt/mzML/151107_Ecoli_12prot_spike_MS2_Fr1_indexed-10min-3.mzML
-Ecoli_12prot_spike_Fr1,2,ecoli,$TEST_DATA_DIR/ecoli_tmt/mzML/151107_Ecoli_12prot_spike_MS2_Fr1_indexed-10min-4.mzML
-Ecoli_12prot_spike_Fr1,3,ecoli,$TEST_DATA_DIR/ecoli_tmt/mzML/151107_Ecoli_12prot_spike_MS2_Fr1_indexed-10min-5.mzML
-Ecoli_12prot_spike_Fr2,1,ecoli,$TEST_DATA_DIR/ecoli_tmt/mzML/151107_Ecoli_12prot_spike_MS2_Fr2_indexed-10min-3.mzML
-Ecoli_12prot_spike_Fr2,2,ecoli,$TEST_DATA_DIR/ecoli_tmt/mzML/151107_Ecoli_12prot_spike_MS2_Fr2_indexed-10min-4.mzML
-Ecoli_12prot_spike_Fr2,3,ecoli,$TEST_DATA_DIR/ecoli_tmt/mzML/151107_Ecoli_12prot_spike_MS2_Fr2_indexed-10min-5.mzML
+sample_name,fraction_id,path
+Ecoli_12prot_spike_Fr1,F1,$TEST_DATA_DIR/ecoli_tmt/mzML/151107_Ecoli_12prot_spike_MS2_Fr1_indexed-10min-3.mzML
+Ecoli_12prot_spike_Fr1,F2,$TEST_DATA_DIR/ecoli_tmt/mzML/151107_Ecoli_12prot_spike_MS2_Fr1_indexed-10min-4.mzML
+Ecoli_12prot_spike_Fr1,F3,$TEST_DATA_DIR/ecoli_tmt/mzML/151107_Ecoli_12prot_spike_MS2_Fr1_indexed-10min-5.mzML
+Ecoli_12prot_spike_Fr2,F1,$TEST_DATA_DIR/ecoli_tmt/mzML/151107_Ecoli_12prot_spike_MS2_Fr2_indexed-10min-3.mzML
+Ecoli_12prot_spike_Fr2,F2,$TEST_DATA_DIR/ecoli_tmt/mzML/151107_Ecoli_12prot_spike_MS2_Fr2_indexed-10min-4.mzML
+Ecoli_12prot_spike_Fr2,F3,$TEST_DATA_DIR/ecoli_tmt/mzML/151107_Ecoli_12prot_spike_MS2_Fr2_indexed-10min-5.mzML
