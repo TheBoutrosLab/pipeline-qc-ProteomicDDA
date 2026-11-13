@@ -82,7 +82,7 @@
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
       <li class="breadcrumb-item active">Outputs</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/TheBoutrosLab/pipeline-qc-ProteomicDDA/blob/6e194e1614ec10d238b73cfe1044ebe6baa22397/README.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/TheBoutrosLab/pipeline-qc-ProteomicDDA/blob/64d8d0ad8a873538cfdbf81f7a9a202dbed7e507/README.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -150,7 +150,7 @@
 </tr>
 </tbody>
 </table>
-<p>Each metric row records <code>dataset_id</code>, <code>acquisition_mode</code>, <code>layer</code>, <code>sample_name</code>, <code>fraction_id</code>, <code>search_engine</code>, <code>inference_route</code>, <code>source_process</code>, <code>metric_name</code>, <code>group</code>, <code>value</code>, <code>unit</code>, <code>status</code>, <code>source_file</code>, and <code>calculation_version</code>. The merged table follows this layer order: <code>acquisition</code>, <code>raw_identification</code>, <code>psm_features</code>, <code>validated_identification</code>, <code>protein_inference</code>, <code>spectral_library</code>, <code>quantification</code>. The current DDA pipeline has no spectral-library metrics, so that layer has no rows. Cohort protein-group rows have no sample key. Programmed LC gradient duration is not derived from these inputs. RT deviation requires a published prediction feature. Longitudinal CVs and correlations require explicit repeated-QC metadata.</p>
+<p>Each metric row records the same 12 columns, in the same order, as the DIA QC pipeline: <code>dataset_id</code>, <code>layer</code>, <code>source_process</code>, <code>sample_name</code>, <code>search_engine</code>, <code>fraction_id</code>, <code>metric_name</code>, <code>group</code>, <code>value</code>, <code>unit</code>, <code>status</code>, <code>source_file</code>. The merged table follows this layer order: <code>acquisition</code>, <code>raw_identification</code>, <code>psm_features</code>, <code>validated_identification</code>, <code>protein_inference</code>, <code>spectral_library</code>, <code>quantification</code>. The current DDA pipeline has no spectral-library metrics, so that layer has no rows. Cohort protein-group rows have no sample key. Programmed LC gradient duration is not derived from these inputs. RT deviation requires a published prediction feature. Longitudinal CVs and correlations require explicit repeated-QC metadata. This schema is a breaking change: no old-name aliases or legacy parser are provided.</p>
               
             </div>
           </div><footer>

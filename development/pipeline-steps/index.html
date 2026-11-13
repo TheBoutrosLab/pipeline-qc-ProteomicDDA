@@ -82,7 +82,7 @@
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
       <li class="breadcrumb-item active">Pipeline steps</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/TheBoutrosLab/pipeline-qc-ProteomicDDA/blob/6e194e1614ec10d238b73cfe1044ebe6baa22397/README.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/TheBoutrosLab/pipeline-qc-ProteomicDDA/blob/64d8d0ad8a873538cfdbf81f7a9a202dbed7e507/README.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -103,7 +103,7 @@
 <tr>
 <td><code>summarize_mzML</code></td>
 <td>One original mzML fraction</td>
-<td>Acquisition duration, MS1/MS2 scan counts and rates, survey cycle timing, MS2 scans per cycle, and whole-run/early/late TIC summaries</td>
+<td>Acquisition duration, MS1/MS2 scan counts and rates, survey cycle timing, MS2 scans per cycle, and whole-run TIC summary</td>
 </tr>
 <tr>
 <td><code>extract_MS1_matrix</code></td>
@@ -118,12 +118,12 @@
 <tr>
 <td><code>summarize_search_idXML</code></td>
 <td>One raw search idXML per sample and engine</td>
-<td>Candidate and top-hit counts, score, signed/absolute ppm mass error, target/decoy, and precursor charge summaries</td>
+<td>Candidate and top-hit counts, distinct top-hit peptides, score metadata, unknown target/decoy labels, signed/absolute ppm mass error, and precursor charge summaries</td>
 </tr>
 <tr>
 <td><code>summarize_filtered_idXML</code></td>
 <td>One final filtered idXML per sample or plex</td>
-<td>Accepted PSMs, distinct retained peptides, and validated score summaries</td>
+<td>All accepted PSMs, distinct retained peptides, validated score metadata, and unknown target/decoy labels</td>
 </tr>
 <tr>
 <td><code>summarize_PSMFeatures</code></td>
@@ -137,8 +137,8 @@
 </tr>
 <tr>
 <td><code>summarize_ProteinQuantifier</code></td>
-<td>Peptide and protein abundance tables</td>
-<td>Quantified feature counts, zero/missing counts, missing fractions, and log10 positive intensity summaries per assay column</td>
+<td>Peptide and protein-group abundance tables</td>
+<td>Distinct quantified peptide/protein-group counts and log10 positive intensity summaries per assay column</td>
 </tr>
 <tr>
 <td><code>collect_QCMetrics</code></td>
@@ -147,8 +147,8 @@
 </tr>
 </tbody>
 </table>
-<p>A continuous distribution is saved as its nonmissing count, missing count, and 5th, 25th, 50th, 75th, and 95th percentiles. <code>group=all</code> includes target and decoy top hits; target and decoy also have separate summaries. Charge states have counts and fractions. The searchable-spectrum denominator is not present in the raw idXML when unmatched spectra are omitted, so <code>searched_ms2_spectrum_count</code> and <code>spectrum_match_coverage</code> are explicitly marked <code>unavailable</code>. A recorded mzML acquisition duration is not necessarily the programmed LC gradient duration.</p>
-<p>PSM feature summaries use actual PIN columns or OpenMS <code>extra_features</code> metadata: <code>deltamass</code>, <code>dm</code>, <code>absdm</code>, RT delta or difference fields, and spectral angle, entropy, correlation, or cosine fields when present. <code>deltamass</code> is an m/z difference; when <code>CalcMass</code> is present, signed and absolute ppm mass errors are also reported. Other source feature units are left blank unless established by the source. Missing mass or RT features are marked <code>unavailable</code> rather than zero. Counts and distributions are reported for all PSMs and separately for targets and decoys.</p>
+<p>A continuous distribution is saved as its nonmissing count, missing count, and 5th, 25th, 50th, 75th, and 95th percentiles. <code>group=all</code> includes target, decoy, and unknown labels; these classes also have separate summaries. A required distribution whose source field is absent has all seven rows marked <code>unavailable</code>. Raw top hits mean the best finite-score hit per idXML peptide-identification record, not necessarily one hit per spectrum. Charge states have counts and fractions. A recorded mzML acquisition duration is not necessarily the programmed LC gradient duration.</p>
+<p>PSM feature summaries use actual PIN columns or OpenMS <code>extra_features</code> metadata: <code>deltamass</code>, <code>dm</code>, <code>absdm</code>, RT delta or difference fields, and spectral angle, entropy, correlation, or cosine fields when present. <code>deltamass</code> is an m/z difference; when <code>CalcMass</code> is present, signed and absolute ppm mass errors are also reported. Other source feature units are left blank unless established by the source. Missing derived ppm mass-error families are marked <code>unavailable</code> rather than zero; absent optional RT and spectral feature columns emit no rows. Counts and distributions are reported for all PSMs and separately for targets, decoys, and unknown labels.</p>
 <p>The MS1 matrix includes up to 120 strongest positive peaks from each of 350 evenly spaced MS1 scans within m/z 300–1200. The HTML embeds Plotly and works offline. Its colors encode within-run log-intensity percentiles: yellow (0–25), orange (25–50), red (50–75), purple (75–95), and blue (95–100). Colors do not represent the same absolute intensity across runs.</p>
               
             </div>

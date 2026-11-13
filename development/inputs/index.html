@@ -82,7 +82,7 @@
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
       <li class="breadcrumb-item active">Inputs</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/TheBoutrosLab/pipeline-qc-ProteomicDDA/blob/6e194e1614ec10d238b73cfe1044ebe6baa22397/README.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/TheBoutrosLab/pipeline-qc-ProteomicDDA/blob/64d8d0ad8a873538cfdbf81f7a9a202dbed7e507/README.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -105,7 +105,9 @@ sample_01,MSFragger,/data/sample_01_MSFragger.idXML
 <pre><code class="language-csv">sample_name,idXML
 sample_01,/data/sample_01_MSFragger_filter.idXML
 </code></pre>
-<p>For TMT, <code>plex_id,idXML</code> is accepted in the filtered CSV. The search CSV can be the metapipeline's published <code>validation.csv</code>, and the filtered CSV can be its published <code>quant-idxml.csv</code>. Each mzML sample must occur in both identification manifests. Use one final consensus filtered idXML per sample when searches from multiple engines were merged; do not sum it with per-engine filtered counts.</p>
+<p>The search CSV can be the metapipeline's published <code>validation.csv</code>, and the filtered CSV can be its published <code>quant-idxml.csv</code>. For TMT, <code>sample_name</code> is the plex ID in the mzML and search manifests, while the filtered manifest uses <code>plex_id,idXML</code> as published by the metapipeline. LFQ uses <code>sample_name,idXML</code> in the filtered manifest. Each mzML sample or plex must occur in both identification manifests. Use one final consensus filtered idXML per sample when searches from multiple engines were merged; do not sum it with per-engine filtered counts.</p>
+<p>Set <code>quantification_mode</code> explicitly to <code>TMT</code> or <code>LFQ</code>. TMT also requires <code>channel_csv</code> with <code>plex_id,channel,description</code>, matching the reporter-channel manifest passed to TMT quantitation. The <code>description</code> is the biological sample or reference label written to quantification metric <code>group</code>. Unassigned channels have an empty <code>group</code>.</p>
+<p>If a ProteinQuantifier abundance header cannot be matched unambiguously to an mzML sample/plex, provide <code>assay_mapping_csv</code> with columns <code>level,abundance_column,sample_name,fraction_id,reporter_channel,group</code>. <code>level</code> is <code>peptide</code> or <code>protein</code>; <code>abundance_column</code> is the exact table header. Leave <code>fraction_id</code> blank for an assay spanning fractions, and leave <code>group</code> blank for an unassigned TMT channel. The pipeline fails on ambiguous headers rather than guessing from a filename or fraction-group number.</p>
 <p><strong>Optional PSM feature CSV</strong> (<code>psm_features_csv</code>):</p>
 <pre><code class="language-csv">sample_name,search_engine,route,fraction_id,path
 sample_01,MSFragger,MSBooster,1,/data/sample_01/MSBooster/output/engine_MSFragger/run_01-fraction_1_edited.pin
@@ -123,6 +125,18 @@ sample_01,Comet,PSMFeatureExtractor,,/data/sample_01/OpenMS-3.5.0/output/sample_
 <tr>
 <td><code>dataset_id</code></td>
 <td>Cohort identifier used in the output path and metric filenames.</td>
+</tr>
+<tr>
+<td><code>quantification_mode</code></td>
+<td>Required <code>TMT</code> or <code>LFQ</code> mode.</td>
+</tr>
+<tr>
+<td><code>channel_csv</code></td>
+<td>TMT plex/channel/description CSV; required for TMT.</td>
+</tr>
+<tr>
+<td><code>assay_mapping_csv</code></td>
+<td>Optional explicit mapping for ambiguous abundance headers.</td>
 </tr>
 <tr>
 <td><code>mzml_csv</code></td>
@@ -178,7 +192,7 @@ sample_01,Comet,PSMFeatureExtractor,,/data/sample_01/OpenMS-3.5.0/output/sample_
 </tr>
 </tbody>
 </table>
-<p>ProteinProphet grouping uses the filtered idXML passed to ProteinQuantifier, now published in the protein quantitation output directory. ProteinInferencer grouping uses the inferred consensusXML; choose the protein-FDR-filtered version if that was passed downstream. The two ProteinQuantifier tables are tab-delimited despite their <code>.csv</code> extension. Their comment lines and <code>abundance_fgroup*_label*</code> or detailed <code>abundance|...|ch*</code> columns are parsed directly. Run names from the fraction-group comment populate <code>sample_name</code> when available; the abundance-column ID remains in <code>group</code> to preserve TMT label and assay identity.</p>
+<p>ProteinProphet grouping uses the filtered idXML passed to ProteinQuantifier, now published in the protein quantitation output directory. ProteinInferencer grouping uses the inferred consensusXML; choose the protein-FDR-filtered version if that was passed downstream. The two current ProteinQuantifier tables are tab-delimited despite their <code>.csv</code> extension and use <code>abundance|...|ch*</code> headers. QC uses those headers to map each abundance column to a sample or TMT plex; TMT quantification uses the biological channel description in <code>group</code>, while LFQ uses <code>group=all</code>. Older ProteinQuantifier header layouts are not accepted.</p>
               
             </div>
           </div><footer>
