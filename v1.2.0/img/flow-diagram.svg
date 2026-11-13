@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 1400 1027" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:affinity="https://www.affinity.studio/" style="fill-rule:evenodd;clip-rule:evenodd;">
+    <g id="Artboard1" transform="matrix(1,0,0,1,0,-66)">
+        <rect x="0" y="66" width="1400" height="1027" style="fill:none;"/>
+        <g transform="matrix(1,0,0,0.925225,0,66)">
+            <rect x="0" y="0" width="1400" height="1110" style="fill:white;"/>
+        </g>
+        <g>
+            <path d="M425,139L466,139" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+            <path d="M880,139L921,139" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+            <path d="M425,254L466,254" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+            <path d="M880,254L921,254" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+            <path d="M425,369L466,369" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+            <path d="M880,369L921,369" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+            <path d="M425,484L466,484" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+            <path d="M880,484L921,484" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+            <path d="M425,599L466,599" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+            <path d="M880,599L921,599" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+            <path d="M425,714L466,714" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+            <path d="M880,714L921,714" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+        </g>
+        <g>
+            <path d="M1325,139L1365,139" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+            <path d="M1325,254L1365,254" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+            <path d="M1325,369L1365,369" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+            <path d="M1325,484L1365,484" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+            <path d="M1325,599L1365,599" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+            <path d="M1325,714L1365,714" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+            <path d="M1365,139L1365,889" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+        </g>
+        <path d="M1365,889L1329,889" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+        <path d="M413,100C419.623,100 425,105.377 425,112L425,166C425,172.623 419.623,178 413,178L92,178C85.377,178 80,172.623 80,166L80,112C80,105.377 85.377,100 92,100L413,100Z" style="fill:rgb(239,244,248);stroke:rgb(155,177,194);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,252.5,132)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">mzML CSV + mzML fractions</text>
+        </g>
+        <g transform="matrix(1,0,0,1,252.5,158)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">one row per sample and fraction</text>
+        </g>
+        <path d="M868,100C874.623,100 880,105.377 880,112L880,166C880,172.623 874.623,178 868,178L482,178C475.377,178 470,172.623 470,166L470,112C470,105.377 475.377,100 482,100L868,100Z" style="fill:white;stroke:rgb(115,152,199);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,675,124)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">summarize_mzML</text>
+        </g>
+        <g transform="matrix(1,0,0,1,675,146)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:14px;font-weight:700;text-anchor:middle;fill:rgb(82,104,121);">SummarizeMzML.py</text>
+        </g>
+        <g transform="matrix(1,0,0,1,675,166)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">scan counts, rates, cycle time, TIC</text>
+        </g>
+        <path d="M1313,100C1319.623,100 1325,105.377 1325,112L1325,166C1325,172.623 1319.623,178 1313,178L937,178C930.377,178 925,172.623 925,166L925,112C925,105.377 930.377,100 937,100L1313,100Z" style="fill:rgb(255,248,232);stroke:rgb(210,169,86);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,1125,132)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">Acquisition metrics</text>
+        </g>
+        <g transform="matrix(1,0,0,1,1125,158)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">per sample and fraction</text>
+        </g>
+        <path d="M413,215C419.623,215 425,220.377 425,227L425,281C425,287.623 419.623,293 413,293L92,293C85.377,293 80,287.623 80,281L80,227C80,220.377 85.377,215 92,215L413,215Z" style="fill:rgb(239,244,248);stroke:rgb(155,177,194);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,252.5,247)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">Search idXML CSV</text>
+        </g>
+        <g transform="matrix(1,0,0,1,252.5,273)">
+            <g transform="matrix(17,0,0,17,-104.896973,0)">
+            </g>
+            <g transform="matrix(17,0,0,17,-100.173828,0)">
+            </g>
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">unfiltered per sample and engine</text>
+        </g>
+        <path d="M868,215C874.623,215 880,220.377 880,227L880,281C880,287.623 874.623,293 868,293L482,293C475.377,293 470,287.623 470,281L470,227C470,220.377 475.377,215 482,215L868,215Z" style="fill:white;stroke:rgb(115,152,199);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,675,239)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">summarize_search_idXML</text>
+        </g>
+        <g transform="matrix(1,0,0,1,675,261)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:14px;font-weight:700;text-anchor:middle;fill:rgb(82,104,121);">SummarizeIdXML.py</text>
+        </g>
+        <g transform="matrix(1,0,0,1,675,281)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">candidate hits, top scores, mass error</text>
+        </g>
+        <path d="M1313,215C1319.623,215 1325,220.377 1325,227L1325,281C1325,287.623 1319.623,293 1313,293L937,293C930.377,293 925,287.623 925,281L925,227C925,220.377 930.377,215 937,215L1313,215Z" style="fill:rgb(255,248,232);stroke:rgb(210,169,86);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,1125,247)">
+            <g transform="matrix(17,0,0,17,-16.99585,0)">
+            </g>
+            <g transform="matrix(17,0,0,17,-12.272705,0)">
+            </g>
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">Raw identification metrics</text>
+        </g>
+        <g transform="matrix(1,0,0,1,1125,273)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">per sample and search engine</text>
+        </g>
+        <path d="M413,330C419.623,330 425,335.377 425,342L425,396C425,402.623 419.623,408 413,408L92,408C85.377,408 80,402.623 80,396L80,342C80,335.377 85.377,330 92,330L413,330Z" style="fill:rgb(239,244,248);stroke:rgb(155,177,194);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,252.5,362)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">PSM features CSV (optional)</text>
+        </g>
+        <g transform="matrix(1,0,0,1,252.5,388)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">MSBooster PIN or feature idXML</text>
+        </g>
+        <path d="M868,330C874.623,330 880,335.377 880,342L880,396C880,402.623 874.623,408 868,408L482,408C475.377,408 470,402.623 470,396L470,342C470,335.377 475.377,330 482,330L868,330Z" style="fill:white;stroke:rgb(112,170,144);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,675,354)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">summarize_PSMFeatures</text>
+        </g>
+        <g transform="matrix(1,0,0,1,675,376)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:14px;font-weight:700;text-anchor:middle;fill:rgb(82,104,121);">SummarizePSMFeatures.py</text>
+        </g>
+        <g transform="matrix(1,0,0,1,675,396)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">mass, RT, spectral, enzyme features</text>
+        </g>
+        <path d="M1313,330C1319.623,330 1325,335.377 1325,342L1325,396C1325,402.623 1319.623,408 1313,408L937,408C930.377,408 925,402.623 925,396L925,342C925,335.377 930.377,330 937,330L1313,330Z" style="fill:rgb(255,248,232);stroke:rgb(210,169,86);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,1125,362)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">PSM feature metrics</text>
+        </g>
+        <g transform="matrix(1,0,0,1,1125,388)">
+            <g transform="matrix(17,0,0,17,71.357666,0)">
+            </g>
+            <g transform="matrix(17,0,0,17,76.080811,0)">
+            </g>
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">per published feature file</text>
+        </g>
+        <path d="M413,445C419.623,445 425,450.377 425,457L425,511C425,517.623 419.623,523 413,523L92,523C85.377,523 80,517.623 80,511L80,457C80,450.377 85.377,445 92,445L413,445Z" style="fill:rgb(239,244,248);stroke:rgb(155,177,194);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,252.5,477)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">Filtered idXML CSV</text>
+        </g>
+        <g transform="matrix(1,0,0,1,252.5,503)">
+            <g transform="matrix(17,0,0,17,-107.403809,0)">
+            </g>
+            <g transform="matrix(17,0,0,17,-102.680664,0)">
+            </g>
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">final per sample or TMT plex</text>
+        </g>
+        <path d="M868,445C874.623,445 880,450.377 880,457L880,511C880,517.623 874.623,523 868,523L482,523C475.377,523 470,517.623 470,511L470,457C470,450.377 475.377,445 482,445L868,445Z" style="fill:white;stroke:rgb(115,152,199);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,675,469)">
+            <g transform="matrix(17,0,0,17,-8.043457,0)">
+            </g>
+            <g transform="matrix(17,0,0,17,-3.320312,0)">
+            </g>
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">summarize_filtered_idXML</text>
+        </g>
+        <g transform="matrix(1,0,0,1,675,491)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:14px;font-weight:700;text-anchor:middle;fill:rgb(82,104,121);">SummarizeIdXML.py</text>
+        </g>
+        <g transform="matrix(1,0,0,1,675,511)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">accepted PSMs and validated scores</text>
+        </g>
+        <path d="M1313,445C1319.623,445 1325,450.377 1325,457L1325,511C1325,517.623 1319.623,523 1313,523L937,523C930.377,523 925,517.623 925,511L925,457C925,450.377 930.377,445 937,445L1313,445Z" style="fill:rgb(255,248,232);stroke:rgb(210,169,86);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,1125,477)">
+            <g transform="matrix(17,0,0,17,0.817627,0)">
+            </g>
+            <g transform="matrix(17,0,0,17,5.540771,0)">
+            </g>
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">Validated identification metrics</text>
+        </g>
+        <g transform="matrix(1,0,0,1,1125,503)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">per sample or TMT plex</text>
+        </g>
+        <path d="M413,560C419.623,560 425,565.377 425,572L425,626C425,632.623 419.623,638 413,638L92,638C85.377,638 80,632.623 80,626L80,572C80,565.377 85.377,560 92,560L413,560Z" style="fill:rgb(239,244,248);stroke:rgb(155,177,194);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,252.5,592)">
+            <g transform="matrix(17,0,0,17,55.756348,0)">
+            </g>
+            <g transform="matrix(17,0,0,17,60.479492,0)">
+            </g>
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">Protein inference file</text>
+        </g>
+        <g transform="matrix(1,0,0,1,252.5,618)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">ProteinProphet idXML or consensusXML</text>
+        </g>
+        <path d="M868,560C874.623,560 880,565.377 880,572L880,626C880,632.623 874.623,638 868,638L482,638C475.377,638 470,632.623 470,626L470,572C470,565.377 475.377,560 482,560L868,560Z" style="fill:white;stroke:rgb(115,152,199);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,675,584)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">summarize_ProteinGroups</text>
+        </g>
+        <g transform="matrix(1,0,0,1,675,606)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:14px;font-weight:700;text-anchor:middle;fill:rgb(82,104,121);">SummarizeProteinGroups.py</text>
+        </g>
+        <g transform="matrix(1,0,0,1,675,626)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">group count, size, probability or score</text>
+        </g>
+        <path d="M1313,560C1319.623,560 1325,565.377 1325,572L1325,626C1325,632.623 1319.623,638 1313,638L937,638C930.377,638 925,632.623 925,626L925,572C925,565.377 930.377,560 937,560L1313,560Z" style="fill:rgb(255,248,232);stroke:rgb(210,169,86);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,1125,592)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">Protein inference metrics</text>
+        </g>
+        <g transform="matrix(1,0,0,1,1125,618)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">cohort level</text>
+        </g>
+        <path d="M413,675C419.623,675 425,680.377 425,687L425,741C425,747.623 419.623,753 413,753L92,753C85.377,753 80,747.623 80,741L80,687C80,680.377 85.377,675 92,675L413,675Z" style="fill:rgb(239,244,248);stroke:rgb(155,177,194);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,252.5,707)">
+            <g transform="matrix(17,0,0,17,15.124023,0)">
+            </g>
+            <g transform="matrix(17,0,0,17,19.847168,0)">
+            </g>
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">ProteinQuantifier tables</text>
+        </g>
+        <g transform="matrix(1,0,0,1,252.5,733)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">peptide + protein; TMT channel CSV</text>
+        </g>
+        <path d="M868,675C874.623,675 880,680.377 880,687L880,741C880,747.623 874.623,753 868,753L482,753C475.377,753 470,747.623 470,741L470,687C470,680.377 475.377,675 482,675L868,675Z" style="fill:white;stroke:rgb(115,152,199);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,675,699)">
+            <g transform="matrix(17,0,0,17,86.456787,0)">
+            </g>
+            <g transform="matrix(17,0,0,17,91.179932,0)">
+            </g>
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">summarize_ProteinQuantifier</text>
+        </g>
+        <g transform="matrix(1,0,0,1,675,721)">
+            <g transform="matrix(17,0,0,17,29.75415,0)">
+            </g>
+            <g transform="matrix(17,0,0,17,34.477295,0)">
+            </g>
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:14px;font-weight:700;text-anchor:middle;fill:rgb(82,104,121);">SummarizeQuantification.py</text>
+        </g>
+        <g transform="matrix(1,0,0,1,675,741)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">counts and abundance distributions</text>
+        </g>
+        <path d="M1313,675C1319.623,675 1325,680.377 1325,687L1325,741C1325,747.623 1319.623,753 1313,753L937,753C930.377,753 925,747.623 925,741L925,687C925,680.377 930.377,675 937,675L1313,675Z" style="fill:rgb(255,248,232);stroke:rgb(210,169,86);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,1125,707)">
+            <g transform="matrix(17,0,0,17,-31.638428,0)">
+            </g>
+            <g transform="matrix(17,0,0,17,-26.915283,0)">
+            </g>
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">Quantification metrics</text>
+        </g>
+        <g transform="matrix(1,0,0,1,1125,733)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">per abundance column</text>
+        </g>
+        <g transform="matrix(1,0,0,1,80,826)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:18px;font-weight:700;text-anchor:start;fill:rgb(23,48,68);">MS1 visualization · separate output</text>
+        </g>
+        <path d="M80,139L42,139L42,889L76,889" style="fill:none;fill-rule:nonzero;stroke:rgb(112,170,144);stroke-width:2.5px;"/>
+        <path d="M413,850C419.623,850 425,855.377 425,862L425,916C425,922.623 419.623,928 413,928L92,928C85.377,928 80,922.623 80,916L80,862C80,855.377 85.377,850 92,850L413,850Z" style="fill:white;stroke:rgb(112,170,144);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,252.5,874)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">extract_MS1_matrix</text>
+        </g>
+        <g transform="matrix(1,0,0,1,252.5,896)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:14px;font-weight:700;text-anchor:middle;fill:rgb(82,104,121);">ExtractMS1Matrix.py</text>
+        </g>
+        <g transform="matrix(1,0,0,1,252.5,916)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">selected RT, m/z, intensity peaks</text>
+        </g>
+        <path d="M425,889L466,889" style="fill:none;fill-rule:nonzero;stroke:rgb(112,170,144);stroke-width:2.5px;"/>
+        <path d="M868,850C874.623,850 880,855.377 880,862L880,916C880,922.623 874.623,928 868,928L482,928C475.377,928 470,922.623 470,916L470,862C470,855.377 475.377,850 482,850L868,850Z" style="fill:white;stroke:rgb(112,170,144);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,675,874)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">plot_MS1_landscape</text>
+        </g>
+        <g transform="matrix(1,0,0,1,675,896)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:14px;font-weight:700;text-anchor:middle;fill:rgb(82,104,121);">PlotMS1Landscape.py</text>
+        </g>
+        <g transform="matrix(1,0,0,1,675,916)">
+            <g transform="matrix(17,0,0,17,-68.651611,0)">
+            </g>
+            <g transform="matrix(17,0,0,17,-63.928467,0)">
+            </g>
+            <g transform="matrix(17,0,0,17,40.005615,0)">
+            </g>
+            <g transform="matrix(17,0,0,17,44.72876,0)">
+            </g>
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">offline 3D Plotly figure</text>
+        </g>
+        <path d="M675,928L675,976" style="fill:none;fill-rule:nonzero;stroke:rgb(112,170,144);stroke-width:2.5px;"/>
+        <path d="M868,980C874.623,980 880,985.377 880,992L880,1050C880,1056.623 874.623,1062 868,1062L482,1062C475.377,1062 470,1056.623 470,1050L470,992C470,985.377 475.377,980 482,980L868,980Z" style="fill:rgb(255,248,232);stroke:rgb(210,169,86);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,675,1013)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">MS1 peak-map HTML</text>
+        </g>
+        <g transform="matrix(1,0,0,1,675,1039)">
+            <g transform="matrix(17,0,0,17,-33.688721,0)">
+            </g>
+            <g transform="matrix(17,0,0,17,-28.965576,0)">
+            </g>
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">one interactive figure per mzML fraction</text>
+        </g>
+        <g transform="matrix(1,0,0,1,925,826)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:18px;font-weight:700;text-anchor:start;fill:rgb(23,48,68);">Metric aggregation</text>
+        </g>
+        <path d="M1313,850C1319.623,850 1325,855.377 1325,862L1325,916C1325,922.623 1319.623,928 1313,928L937,928C930.377,928 925,922.623 925,916L925,862C925,855.377 930.377,850 937,850L1313,850Z" style="fill:white;stroke:rgb(115,152,199);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,1125,874)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">collect_QCMetrics</text>
+        </g>
+        <g transform="matrix(1,0,0,1,1125,896)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:14px;font-weight:700;text-anchor:middle;fill:rgb(82,104,121);">CollectQCMetrics.py</text>
+        </g>
+        <g transform="matrix(1,0,0,1,1125,916)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">merge and order stage metric TSVs</text>
+        </g>
+        <path d="M1125,928L1125,976" style="fill:none;fill-rule:nonzero;stroke:rgb(75,97,114);stroke-width:2.5px;"/>
+        <path d="M1313,980C1319.623,980 1325,985.377 1325,992L1325,1050C1325,1056.623 1319.623,1062 1313,1062L937,1062C930.377,1062 925,1056.623 925,1050L925,992C925,985.377 930.377,980 937,980L1313,980Z" style="fill:rgb(255,248,232);stroke:rgb(210,169,86);stroke-width:2px;"/>
+        <g transform="matrix(1,0,0,1,1125,1013)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:17px;font-weight:700;text-anchor:middle;fill:rgb(23,48,68);">Cohort QC metrics TSV</text>
+        </g>
+        <g transform="matrix(1,0,0,1,1125,1039)">
+            <text x="0px" y="0px" style="font-family:'Helvetica',Arial,sans-serif;font-size:13px;font-weight:400;text-anchor:middle;fill:rgb(82,104,121);">&lt;dataset_id&gt;_QC_metrics.tsv · 12 columns</text>
+        </g>
+    </g>
+</svg>
