@@ -41,10 +41,16 @@ def make_figure(rows, sample_name):
     figure = go.Figure()
     for color, (xs, ys, zs) in zip(COLORS, traces):
         if xs:
-            figure.add_trace(go.Scatter3d(
-                x=xs, y=ys, z=zs, mode='lines',
+            trace = go.Scatter3d(
+                x=xs,
+                y=ys,
+                z=zs,
+                mode='lines',
                 line={'color': color, 'width': 2},
-                showlegend=False, hoverinfo='skip'))
+                showlegend=False,
+                hoverinfo='skip',
+            )
+            figure.add_trace(trace)
     figure.update_layout(
         title=f'{sample_name} MS1 peak map',
         scene={
@@ -62,23 +68,45 @@ def make_figure(rows, sample_name):
     return figure
 
 
-def run(args):
-    """Read the peak matrix and write an offline HTML figure."""
-    metadata = json.loads(Path(args.metadata).read_text(encoding='utf-8'))
-    rows = []
-    with open(args.matrix, newline='', encoding='utf-8') as handle:
-        reader = csv.DictReader(handle, delimiter='\t')
-        if not {'scan_index', 'rt_sec', 'mz', 'intensity'} <= set(reader.fieldnames or []):
-            raise ValueError('MS1 peak matrix is missing required columns')
-        for row in reader:
-            rt, mz, intensity = (float(row['rt_sec']), float(row['mz']), float(row['intensity']))
-            if not all(math.isfinite(v) for v in (rt, mz, intensity)) or intensity <= 0:
-                raise ValueError('MS1 peak matrix has invalid values')
-            rows.append((rt, mz, intensity))
-    if len(rows) != metadata['selected_peaks']:
-        raise ValueError('MS1 peak matrix row count does not match metadata')
-    figure = make_figure(rows, metadata['sample_name'])
-    figure.write_html(args.output, include_plotlyjs=True, full_html=True)
+class MS1LandscapePlotter:
+    """Validate an MS1 peak matrix and render its offline 3D figure."""
+
+    def __init__(self, matrix_path, metadata_path):
+        self.matrix_path = matrix_path
+        self.metadata_path = metadata_path
+        self.metadata = {}
+        self.rows = []
+
+    def load_metadata(self):
+        """Read the peak-selection metadata."""
+        self.metadata = json.loads(Path(self.metadata_path).read_text(encoding='utf-8'))
+
+    def load_matrix(self):
+        """Read and validate the selected MS1 peaks."""
+        with open(self.matrix_path, newline='', encoding='utf-8') as handle:
+            reader = csv.DictReader(handle, delimiter='\t')
+            if not {'scan_index', 'rt_sec', 'mz', 'intensity'} <= set(reader.fieldnames or []):
+                raise ValueError('MS1 peak matrix is missing required columns')
+            for row in reader:
+                rt = float(row['rt_sec'])
+                mz = float(row['mz'])
+                intensity = float(row['intensity'])
+                if not all(math.isfinite(v) for v in (rt, mz, intensity)) or intensity <= 0:
+                    raise ValueError('MS1 peak matrix has invalid values')
+                self.rows.append((rt, mz, intensity))
+        if len(self.rows) != self.metadata['selected_peaks']:
+            raise ValueError('MS1 peak matrix row count does not match metadata')
+
+    def run(self, output_path):
+        """Build the Plotly figure and save it as self-contained HTML."""
+        self.load_metadata()
+        self.load_matrix()
+        figure = make_figure(self.rows, self.metadata['sample_name'])
+        figure.write_html(
+            file=output_path,
+            include_plotlyjs=True,
+            full_html=True,
+        )
 
 
 if __name__ == '__main__':
@@ -86,4 +114,5 @@ if __name__ == '__main__':
     parser.add_argument('--matrix', required=True)
     parser.add_argument('--metadata', required=True)
     parser.add_argument('--output', required=True)
-    run(parser.parse_args())
+    args = parser.parse_args()
+    MS1LandscapePlotter(args.matrix, args.metadata).run(args.output)

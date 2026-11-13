@@ -1,57 +1,114 @@
 #!/usr/bin/env python3
 """Summarize one DDA mzML fraction with pyOpenMS."""
 import argparse
+from collections import namedtuple
 import pyopenms as oms
 from QCMetrics import Metrics, finite
 
+ScanRecord = namedtuple('ScanRecord', ('rt', 'ms_level', 'tic'))
 
-def summarize(args):
-    """Measure recorded duration, scan rates, cycles, and TIC."""
-    experiment = oms.MSExperiment()
-    oms.MzMLFile().load(args.input, experiment)
-    metrics = Metrics(args.dataset_id, 'acquisition', args.input, sample_name=args.sample_name,
-                      fraction_id=args.fraction_id)
-    times, ms1, ms2, tic = [], [], [], []
-    cycle_counts = []
-    current_ms2 = 0
-    for spectrum in experiment.getSpectra():
+
+class MzMLSummarizer:
+    """Collect acquisition QC from one mzML fraction."""
+
+    def __init__(self, mzml_path, dataset_id, sample_name, fraction_id):
+        self.mzml_path = mzml_path
+        self.metrics = Metrics(
+            dataset_id=dataset_id,
+            layer='acquisition',
+            source=mzml_path,
+            sample_name=sample_name,
+            fraction_id=fraction_id,
+        )
+        self.scans = []
+
+    def load(self):
+        """Read spectra with OpenMS and collect the fields needed for QC."""
+        experiment = oms.MSExperiment()
+        oms.MzMLFile().load(self.mzml_path, experiment)
+        for spectrum in experiment.getSpectra():
+            self.record_spectrum(spectrum)
+        if not self.scans:
+            raise ValueError('mzML has no spectra')
+
+    def record_spectrum(self, spectrum):
+        """Record retention time, MS level, and TIC for one spectrum."""
         rt = finite(spectrum.getRT())
-        if rt is None or (times and rt < times[-1]):
+        if rt is None or (self.scans and rt < self.scans[-1].rt):
             raise ValueError('mzML has missing or nonmonotonic retention time')
-        times.append(rt)
-        if spectrum.getMSLevel() == 1:
-            if ms1:
-                cycle_counts.append(current_ms2)
-            ms1.append(rt)
-            current_ms2 = 0
-        elif spectrum.getMSLevel() == 2:
-            ms2.append(rt)
-            current_ms2 += 1
         _, intensities = spectrum.get_peaks()
-        tic.append(float(sum(intensities)) if len(intensities) else None)
-    if not times:
-        raise ValueError('mzML has no spectra')
-    duration = times[-1] - times[0]
-    metrics.add('acquisition_duration', duration / 60, 'min')
-    for name, count in [('scan_count', len(times)), ('ms1_scan_count', len(ms1)),
-                        ('ms2_scan_count', len(ms2))]:
-        metrics.add(name, count)
-        rate_name = name.replace('count', 'rate')
-        if duration > 0:
-            metrics.add(rate_name, count / duration, 'scan/s')
-        else:
-            metrics.unavailable(rate_name, 'scan/s')
-    metrics.distribution('ms1_cycle_time', (b - a for a, b in zip(ms1, ms1[1:])), 's')
-    metrics.distribution('ms2_scans_per_cycle', cycle_counts)
-    metrics.distribution('total_ion_current', tic, 'intensity')
-    midpoint = len(tic) // 2
-    metrics.distribution('total_ion_current_early', tic[:midpoint], 'intensity')
-    metrics.distribution('total_ion_current_late', tic[midpoint:], 'intensity')
-    metrics.write(args.output)
+        tic = float(sum(intensities)) if len(intensities) else None
+        self.scans.append(ScanRecord(rt, spectrum.getMSLevel(), tic))
+
+    def summarize_duration_and_rates(self):
+        """Report observed scan counts and rates over recorded duration."""
+        duration = self.scans[-1].rt - self.scans[0].rt
+        self.metrics.add(
+            name='acquisition_duration',
+            value=duration / 60,
+            unit='min',
+        )
+        counts = (('scan', len(self.scans)),
+                  ('ms1_scan', sum(scan.ms_level == 1 for scan in self.scans)),
+                  ('ms2_scan', sum(scan.ms_level == 2 for scan in self.scans)))
+        for name, count in counts:
+            self.metrics.add(f'{name}_count', count)
+            if duration > 0:
+                self.metrics.add(
+                    name=f'{name}_rate',
+                    value=count / duration,
+                    unit='scan/s',
+                )
+            else:
+                self.metrics.unavailable(f'{name}_rate', 'scan/s')
+
+    def summarize_cycles(self):
+        """Report successive MS1 intervals and their MS2 scan counts."""
+        ms1_times = []
+        ms2_per_cycle = []
+        current_ms2_count = 0
+        for scan in self.scans:
+            if scan.ms_level == 1:
+                if ms1_times:
+                    ms2_per_cycle.append(current_ms2_count)
+                ms1_times.append(scan.rt)
+                current_ms2_count = 0
+            elif scan.ms_level == 2:
+                current_ms2_count += 1
+        intervals = (end - start for start, end in zip(ms1_times, ms1_times[1:]))
+        self.metrics.distribution(
+            name='ms1_cycle_time',
+            values=intervals,
+            unit='s',
+        )
+        self.metrics.distribution('ms2_scans_per_cycle', ms2_per_cycle)
+
+    def summarize_tic(self):
+        """Report per-spectrum total ion current."""
+        self.metrics.distribution(
+            name='total_ion_current',
+            values=(scan.tic for scan in self.scans),
+            unit='intensity',
+        )
+
+    def run(self, output_path):
+        """Read the mzML and write its acquisition QC metrics."""
+        self.load()
+        self.summarize_duration_and_rates()
+        self.summarize_cycles()
+        self.summarize_tic()
+        self.metrics.write(output_path)
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     for argument in ('input', 'output', 'sample-name', 'fraction-id', 'dataset-id'):
         parser.add_argument('--' + argument, required=True)
-    summarize(parser.parse_args())
+    args = parser.parse_args()
+    summarizer = MzMLSummarizer(
+        mzml_path=args.input,
+        dataset_id=args.dataset_id,
+        sample_name=args.sample_name,
+        fraction_id=args.fraction_id,
+    )
+    summarizer.run(args.output)

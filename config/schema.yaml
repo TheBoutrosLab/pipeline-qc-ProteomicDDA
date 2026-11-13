@@ -3,6 +3,21 @@ dataset_id:
   type: 'String'
   required: true
   help: 'Cohort identifier'
+quantification_mode:
+  type: 'String'
+  choices: ['TMT', 'LFQ']
+  required: true
+  help: 'DDA quantification mode'
+channel_csv:
+  type: 'Path'
+  mode: 'r'
+  required: false
+  help: 'TMT plex_id,channel,description CSV; required for TMT'
+assay_mapping_csv:
+  type: 'Path'
+  mode: 'r'
+  required: false
+  help: 'Optional explicit level,abundance_column,sample_name,fraction_id,reporter_channel,group mapping'
 mzml_csv:
   type: 'Path'
   mode: 'r'
@@ -17,7 +32,7 @@ filtered_idxml_csv:
   type: 'Path'
   mode: 'r'
   required: true
-  help: 'Published quant-idxml.csv with sample_name or plex_id,idXML'
+  help: 'Published quant-idxml.csv with plex_id,idXML for TMT or sample_name,idXML for LFQ'
 psm_features_csv:
   type: 'Path'
   mode: 'r'
