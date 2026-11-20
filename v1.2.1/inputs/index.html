@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Inputs - pipeline-qc-ProteomicDDA</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/version-select.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Inputs";
+        var mkdocs_page_input_path = "inputs.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> pipeline-qc-ProteomicDDA
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../how-to-run/">How to run</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Inputs</a>
+    <ul class="current">
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../pipeline-steps/">Pipeline steps</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../outputs/">Outputs</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../testing/">Testing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../license/">License</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">pipeline-qc-ProteomicDDA</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Inputs</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/TheBoutrosLab/pipeline-qc-ProteomicDDA/blob/v1.2.1/README.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="inputs">Inputs</h2>
+<p>Three CSV manifests identify the same set of samples or TMT plexes. Paths in these CSVs may be absolute or relative to the CSV directory. Multiple mzML fractions and multiple search engines per sample are supported.</p>
+<p><strong>mzML CSV</strong> (<code>mzml_csv</code>):</p>
+<pre><code class="language-csv">sample_name,fraction_id,path
+sample_01,1,/data/sample_01_fraction_1.mzML
+sample_01,2,/data/sample_01_fraction_2.mzML
+</code></pre>
+<p><strong>Unfiltered search idXML CSV</strong> (<code>search_idxml_csv</code>):</p>
+<pre><code class="language-csv">sample_name,search_engine,idXML
+sample_01,MSFragger,/data/sample_01_MSFragger.idXML
+</code></pre>
+<p><strong>Final filtered idXML CSV</strong> (<code>filtered_idxml_csv</code>):</p>
+<pre><code class="language-csv">sample_name,idXML
+sample_01,/data/sample_01_MSFragger_filter.idXML
+</code></pre>
+<p>The search CSV can be the metapipeline's published <code>validation.csv</code>, and the filtered CSV can be its published <code>quant-idxml.csv</code>. For TMT, <code>sample_name</code> is the plex ID in the mzML and search manifests, while the filtered manifest uses <code>plex_id,idXML</code> as published by the metapipeline. LFQ uses <code>sample_name,idXML</code> in the filtered manifest. Each mzML sample or plex must occur in both identification manifests. Use one final consensus filtered idXML per sample when searches from multiple engines were merged; do not sum it with per-engine filtered counts.</p>
+<p>Set <code>quantification_mode</code> explicitly to <code>TMT</code> or <code>LFQ</code>. TMT also requires <code>channel_csv</code> with <code>plex_id,channel,description</code>, matching the reporter-channel manifest passed to TMT quantitation. The <code>description</code> is the biological sample or reference label written to quantification metric <code>group</code>. Unassigned channels have an empty <code>group</code>.</p>
+<p>If a ProteinQuantifier abundance header cannot be matched unambiguously to an mzML sample/plex, provide <code>assay_mapping_csv</code> with columns <code>level,abundance_column,sample_name,fraction_id,reporter_channel,group</code>. <code>level</code> is <code>peptide</code> or <code>protein</code>; <code>abundance_column</code> is the exact table header. Leave <code>fraction_id</code> blank for an assay spanning fractions, and leave <code>group</code> blank for an unassigned TMT channel. The pipeline fails on ambiguous headers rather than guessing from a filename or fraction-group number.</p>
+<p><strong>Optional PSM feature CSV</strong> (<code>psm_features_csv</code>):</p>
+<pre><code class="language-csv">sample_name,search_engine,route,fraction_id,path
+sample_01,MSFragger,MSBooster,1,/data/sample_01/MSBooster/output/engine_MSFragger/run_01-fraction_1_edited.pin
+sample_01,Comet,PSMFeatureExtractor,,/data/sample_01/OpenMS-3.5.0/output/sample_01_Comet_featureExtracted.idXML
+</code></pre>
+<p><code>route</code> identifies the producing process: <code>MSBooster</code> for an edited PIN or <code>PSMFeatureExtractor</code> for an idXML. List one row per published file. MSBooster rows require a <code>fraction_id</code> present in the mzML CSV; PSMFeatureExtractor rows may leave it blank. The sample and search engine must occur together in the search CSV. A header-only CSV is valid when no feature files were published. Paths may be absolute or relative to the feature CSV.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dataset_id</code></td>
+<td>Cohort identifier used in the output path and metric filenames.</td>
+</tr>
+<tr>
+<td><code>quantification_mode</code></td>
+<td>Required <code>TMT</code> or <code>LFQ</code> mode.</td>
+</tr>
+<tr>
+<td><code>channel_csv</code></td>
+<td>TMT plex/channel/description CSV; required for TMT.</td>
+</tr>
+<tr>
+<td><code>assay_mapping_csv</code></td>
+<td>Optional explicit mapping for ambiguous abundance headers.</td>
+</tr>
+<tr>
+<td><code>mzml_csv</code></td>
+<td>Per-fraction mzML manifest.</td>
+</tr>
+<tr>
+<td><code>search_idxml_csv</code></td>
+<td>Unfiltered search idXML manifest, keyed by sample and search engine.</td>
+</tr>
+<tr>
+<td><code>filtered_idxml_csv</code></td>
+<td>Final filtered idXML manifest, keyed by sample or TMT plex.</td>
+</tr>
+<tr>
+<td><code>psm_features_csv</code></td>
+<td>Optional manifest of published MSBooster PIN or PSMFeatureExtractor idXML files.</td>
+</tr>
+<tr>
+<td><code>inference_route</code></td>
+<td><code>ProteinProphet</code> or <code>ProteinInferencer</code>.</td>
+</tr>
+<tr>
+<td><code>protein_groups</code></td>
+<td>Cohort filtered ProteinProphet idXML or ProteinInferencer consensusXML.</td>
+</tr>
+<tr>
+<td><code>protein_quant_csv</code></td>
+<td>ProteinQuantifier protein abundance table.</td>
+</tr>
+<tr>
+<td><code>peptide_quant_csv</code></td>
+<td>ProteinQuantifier peptide abundance table.</td>
+</tr>
+<tr>
+<td><code>output_dir</code></td>
+<td>Root directory for QC results.</td>
+</tr>
+<tr>
+<td><code>work_dir</code></td>
+<td>Optional Nextflow work directory.</td>
+</tr>
+<tr>
+<td><code>pyopenms_version</code></td>
+<td>pyOpenMS image tag; default <code>3.5.0</code>.</td>
+</tr>
+<tr>
+<td><code>docker_image_plotly</code></td>
+<td>Plotly image; default <code>multiqc/multiqc:v1.35</code>.</td>
+</tr>
+<tr>
+<td><code>base_resource_update</code></td>
+<td>Optional process CPU and memory overrides.</td>
+</tr>
+</tbody>
+</table>
+<p>ProteinProphet grouping uses the filtered idXML passed to ProteinQuantifier, now published in the protein quantitation output directory. ProteinInferencer grouping uses the inferred consensusXML; choose the protein-FDR-filtered version if that was passed downstream. The two current ProteinQuantifier tables are tab-delimited despite their <code>.csv</code> extension and use <code>abundance|...|ch*</code> headers. QC uses those headers to map each abundance column to a sample or TMT plex; TMT quantification uses the biological channel description in <code>group</code>, while LFQ uses <code>group=all</code>. Older ProteinQuantifier header layouts are not accepted.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../how-to-run/" class="btn btn-neutral float-left" title="How to run"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../pipeline-steps/" class="btn btn-neutral float-right" title="Pipeline steps">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/TheBoutrosLab/pipeline-qc-ProteomicDDA/tree/v1.2.1" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../how-to-run/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../pipeline-steps/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../js/version-select.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
